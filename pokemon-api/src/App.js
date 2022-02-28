@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import axios from 'axios';
 
 // components
 import Pokemon from './components/Pokemon';
+import singlePokemon from './Pages/singlePokemon';
 
 
 function App() {
@@ -18,15 +20,23 @@ function App() {
     };
     fetchApi()
   }, []);
-
+console.log(pokemons.name);
 
   return (
-    <div>
-      {/* render each pokemon from api (calling the first 50) */}
-      { pokemons.map(pokemon => (
-        <Pokemon pokemon={pokemon} />
-      )) }
-    </div>
+    <Router>
+      <div>
+        <Routes>
+          <Route path="/pokemon" element={ <singlePokemon /> } />
+        </Routes>
+
+
+
+        {/* render each pokemon from api (calling the first 50) */}
+        { pokemons.map((pokemon, index) => (
+          <Pokemon pokemon={pokemon} index={index} />
+          )) }
+      </div>
+    </Router> 
   );
 }
 

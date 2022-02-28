@@ -4,8 +4,8 @@ const Pokemon = (props) => {
  const { pokemon } = props;
 
     return ( 
-        <div>
-            <h1 key={pokemon.name}>{pokemon.name}</h1>
+        <div key={props.index}>
+            <h1>{pokemon.name}</h1>
         </div>
      );
 }
