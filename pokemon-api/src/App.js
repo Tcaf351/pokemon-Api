@@ -1,40 +1,24 @@
-import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Navbar from './components/Navbar';
 
-import axios from 'axios';
-
-// components
-import Pokemon from './components/Pokemon';
-import singlePokemon from './Pages/singlePokemon';
+// Pages
+import AllPokemon from './Pages/AllPokemon';
+import Home from './Pages/Home';
+import SinglePokemon from './Pages/SinglePokemon';
 
 
 function App() {
-  const [pokemons, setPokemons] = useState([]);
-
-  // bring in api
-  useEffect(() => {
-    const fetchApi = async () => {
-      const response = await axios.get(`https://pokeapi.co/api/v2/pokemon?limit=50`);
-      // console.log(response.data.results);
-      setPokemons(response.data.results);
-    };
-    fetchApi()
-  }, []);
-console.log(pokemons.name);
-
+  
   return (
     <Router>
       <div>
+      <Navbar />
         <Routes>
-          <Route path="/pokemon" element={ <singlePokemon /> } />
+          <Route path='/' element={ <Home /> } />
+          <Route path="/allpokemon" element={ <AllPokemon /> } />
+          <Route path="/pokemon" element={ <SinglePokemon /> } />
         </Routes>
 
-
-
-        {/* render each pokemon from api (calling the first 50) */}
-        { pokemons.map((pokemon, index) => (
-          <Pokemon pokemon={pokemon} index={index} />
-          )) }
       </div>
     </Router> 
   );

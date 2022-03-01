@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-const Pokemon = (props) => {
+const Card = (props) => {
  const { pokemon } = props;
 
     return ( 
@@ -10,4 +10,4 @@ const Pokemon = (props) => {
      );
 }
  
-export default Pokemon;
+export default Card;
