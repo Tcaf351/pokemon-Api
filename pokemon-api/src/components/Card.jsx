@@ -1,10 +1,10 @@
-import { Link } from 'react-router-dom';
+
 
 const Card = (props) => {
  const { pokemon } = props;
 
     return ( 
-        <div key={props.index}>
+        <div key={pokemon.name}>
             <h1>{pokemon.name}</h1>
         </div>
      );

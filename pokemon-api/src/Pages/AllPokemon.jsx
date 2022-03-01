@@ -11,13 +11,12 @@ const AllPokemon = () => {
     // bring in api
     useEffect(() => {
         const fetchApi = async () => {
-        const response = await axios.get(`https://pokeapi.co/api/v2/pokemon?limit=50`);
-        // console.log(response.data.results);
+        const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/`);
+        console.log(response.data.results);
         setPokemons(response.data.results);
         };
         fetchApi()
     }, []);
-    console.log(pokemons.name);
 
 
     return ( 
