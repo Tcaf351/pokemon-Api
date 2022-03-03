@@ -16,7 +16,7 @@ function App() {
       <div>
       <Navbar />
         <Routes>
-          <Route path="/allpokemon" element={ <AllPokemon /> } />
+          <Route path="/" element={ <AllPokemon /> } />
           <Route path="/pokemon" element={ <SinglePokemon /> } />
         </Routes>
 
