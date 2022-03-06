@@ -32,10 +32,11 @@ const SinglePokemon = () => {
                 <button>Search</button>
             </form>
 
-        { searchedPokemons == '' ? '' : 
+        { searchedPokemons == "" ? "" : 
             <div>
                 <h1>{ searchedPokemons.name }</h1>
                 <img src={ searchedPokemons.sprites.front_default } alt="pokemon" /> 
+                <img src={ searchedPokemons.sprites.front_shiny } alt="shiny pokemon" /> 
                 <h1>{ searchedPokemons.types[0].type.name }</h1> 
             </div>
         }
