@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 // packages
 import axios from 'axios';
@@ -11,17 +11,14 @@ const SinglePokemon = () => {
         e.preventDefault()
         const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`);
         console.log(response.data);
+        // console.log(response.data.types[0].type.name);
+
         setSearchedPokemons(response.data);
     };
 
     const handleChange = (e)=> {
-        e.preventDefault();
         setPokemonName(e.target.value);
     };
-
-    useEffect(() => {
-        
-    }, [searchedPokemons])
 
     return ( 
         <div>
@@ -35,11 +32,13 @@ const SinglePokemon = () => {
                 <button>Search</button>
             </form>
 
-
-            <h1>{searchedPokemons.name}</h1>
-            <img src={searchedPokemons.sprites.front_default} alt="Pokemon" /> 
-            <img src={searchedPokemons.sprites.front_shiny} alt="Pokemon" /> 
-
+        { searchedPokemons == '' ? '' : 
+            <div>
+                <h1>{ searchedPokemons.name }</h1>
+                <img src={ searchedPokemons.sprites.front_default } alt="pokemon" /> 
+                <h1>{ searchedPokemons.types[0].type.name }</h1> 
+            </div>
+        }
           
         </div>
      );
