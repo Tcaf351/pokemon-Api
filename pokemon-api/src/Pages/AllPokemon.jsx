@@ -9,14 +9,14 @@ const AllPokemon = () => {
     const [pokemons, setPokemons] = useState([]);
 
     // bring in api
-    useEffect(() => {
-        const fetchApi = async () => {
-        const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/`);
-        console.log(response.data.results);
-        setPokemons(response.data.results);
-        };
-        fetchApi()
-    }, []);
+    // useEffect(() => {
+    //     const fetchApi = async () => {
+    //     const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/`);
+    //     // console.log(response.data.results);
+    //     setPokemons(response.data.results);
+    //     };
+    //     fetchApi()
+    // }, []);
 
 
     return ( 
