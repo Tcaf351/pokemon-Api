@@ -11,22 +11,33 @@ import SinglePokemon from './Pages/SinglePokemon';
 
 
 function App() {
-  const [arrayOfPokemon, setArrayOfPokemon] = useState();
+  const [allPokemon, setAllPokemon] = useState([]);
+  const [loadMore, setLoadMore] = useState(`https://pokeapi.co/api/v2/pokemon?limit=20`)
 
-  const pushAllPokemonToArray = async () => {
-    const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/`);
-    const data = response.data.results;
-    // console.log(data);
-    let pokemonNames = [];
-    data.forEach(({name}) => {
-      pokemonNames.push(`https://pokeapi.co/api/v2/pokemon/${name}`)
-    })
-    console.log([...pokemonNames]);
-    setArrayOfPokemon(pokemonNames)
+  const getAllPokemon = async () => {
+    const response = await axios.get(loadMore);
+    const data = await response.data;
+    setLoadMore(data.next)
+
+    const allPokemonsInObject = (results) => {
+      results.forEach(async (pokemon) => {
+        const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemon.name}`)
+        console.log(response);
+        setAllPokemon(response)
+      })
+    };
+    allPokemonsInObject(data.results)
+
+    // let pokemonNames = [];
+    // data.forEach(({name}) => {
+    //   pokemonNames.push(`https://pokeapi.co/api/v2/pokemon/${name}`)
+    // })
+    // console.log([...pokemonNames]);
+    // setArrayOfPokemon(pokemonNames)
   }
 
   useEffect(() => {
-    pushAllPokemonToArray()
+    getAllPokemon()
   }, [])
   // console.log(arrayOfPokemon);
   return (
