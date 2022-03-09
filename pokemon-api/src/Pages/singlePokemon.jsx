@@ -36,6 +36,7 @@ const SinglePokemon = () => {
                 <img src={ searchedPokemon.sprites?.front_default } alt="pokemon" /> 
                 <img src={  searchedPokemon.sprites?.front_shiny } alt="shiny pokemon" /> 
                 <h1>{ searchedPokemon.types[0].type.name }</h1>  
+                <h2>{searchedPokemon.weight}lbs</h2>
              </div>
              }
 
