@@ -4,13 +4,13 @@ import { useState } from 'react';
 import axios from 'axios';
 
 const SinglePokemon = () => {
-    const [pokemonName, setPokemonName] = useState('');
-    const [searchedPokemon, setSearchedPokemon] = useState([]);
+    const [pokemonName, setPokemonName] = useState(''); // for input
+    const [searchedPokemon, setSearchedPokemon] = useState(); // for state
 
     const handleSubmit = async (e) => {
         e.preventDefault()
         const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`);
-        // console.log(response.data);
+        console.log(response.data);
 
         setSearchedPokemon(response.data);
     };
@@ -31,14 +31,14 @@ const SinglePokemon = () => {
                 <button>Search</button>
             </form>
 
-        { searchedPokemon == "" ? "" : 
-            <div>
+            {searchedPokemon && <div>
                 <h1>{ searchedPokemon.name }</h1>
-                <img src={ searchedPokemon.sprites.front_default } alt="pokemon" /> 
-                <img src={ searchedPokemon.sprites.front_shiny } alt="shiny pokemon" /> 
-                <h1>{ searchedPokemon.types[0].type.name }</h1> 
-            </div>
-        }
+                <img src={ searchedPokemon.sprites?.front_default } alt="pokemon" /> 
+                <img src={  searchedPokemon.sprites?.front_shiny } alt="shiny pokemon" /> 
+                <h1>{ searchedPokemon.types[0].type.name }</h1>  
+             </div>
+             }
+
           
         </div>
      );

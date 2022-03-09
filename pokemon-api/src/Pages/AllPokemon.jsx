@@ -6,17 +6,25 @@ import Card from '../components/Card';
 
 
 const AllPokemon = () => {
-    const [pokemons, setPokemons] = useState([]);
+    const [allPokemon, setAllPokemon] = useState();
 
     // bring in api
-    // useEffect(() => {
-    //     const fetchApi = async () => {
-    //     const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/`);
-    //     // console.log(response.data.results);
-    //     setPokemons(response.data.results);
-    //     };
-    //     fetchApi()
-    // }, []);
+    useEffect(() => {
+        const fetchApi = async () => {
+
+        
+            let allPokemonData = [];
+        for (let i = 1; i <= 20; i++) {
+            const url = `https://pokeapi.co/api/v2/pokemon/${i}`;
+            const response = await axios.get(url)
+            // console.log(response.data);
+            allPokemonData.push(response.data);
+            console.log(allPokemonData)
+        }
+        setAllPokemon(allPokemonData);
+        }
+        fetchApi()
+    }, []);
 
 
     return ( 
@@ -24,8 +32,8 @@ const AllPokemon = () => {
             <h1>All Pokemon</h1>
 
             {/* render each pokemon from api (calling the first 50) */}
-            { pokemons.map((pokemon, index) => (
-            <Card pokemon={pokemon} index={index} />
+            { allPokemon && allPokemon.map((pokemon) => (
+            <Card pokemon={pokemon} />
             )) }
         </div>
      );
