@@ -1,42 +1,42 @@
 import { useState, useEffect } from 'react';
 
 // packages
-import { Link, useParams } from 'react-router-dom';
-// import axios from 'axios';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 // components
 import Card from '../components/Card';
 
 
-const AllPokemon = (props) => {
-    const { allPokemon } = props;
-    // let { id } = useParams();
-//     const [allPokemon, setAllPokemon] = useState();
+const AllPokemon = () => {
+ 
+    const [allPokemon, setAllPokemon] = useState();
 
-//     // bring in api
-    // useEffect(() => {
-    //     const fetchApi = async () => {
+    // bring in api
+    useEffect(() => {
+        const fetchApi = async () => {
 
-    //         let allPokemonData = [];
+            let allPokemonData = [];
             
-    //         for (let i = 1; i <= 50; i++) {
-    //         const url = `https://pokeapi.co/api/v2/pokemon/${i}`;
-    //         const response = await axios.get(url)
-    //         // console.log(response.data);
-    //         allPokemonData.push(response.data);
-    //         console.log(allPokemonData)
-    //         }
-    //         setAllPokemon(allPokemonData);
-    //     }
-    //     fetchApi()
-    // }, []);
+            for (let i = 1; i <= 50; i++) {
+            const url = `https://pokeapi.co/api/v2/pokemon/${i}`;
+            const response = await axios.get(url)
+            // console.log(response.data);
+            allPokemonData.push(response.data);
+            console.log(allPokemonData)
+            }
+            setAllPokemon(allPokemonData);
+        }
+        fetchApi()
+    }, []);
 
 
     return ( 
         <div className='bg-slate-100 dark:bg-gray-900'>
-            <h1>All Pokemon</h1>
+            <h1 className='text-white'>All Pokemon</h1>
 
             <div  className="grid grid-cols-3 gap-4">
+
             {/* render each pokemon from api (calling the first 50) */}
             { allPokemon && allPokemon.map((pokemon) => (
 

@@ -1,6 +1,27 @@
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 const Navbar = () => {
+
+    const [userName, setUserName] = useState(''); // will store value from input text box
+    const [name, setName] = useState(() => { // set userName and store it in local storage
+            // getting stored value
+            const saved = localStorage.getItem("name");
+            const initialValue = JSON.parse(saved);
+            return initialValue || "";
+    }); 
+  
+
+  
+  useEffect(() => {
+    // storing input name
+    localStorage.setItem("name", JSON.stringify(name));
+
+  }, [name]);
+
+
+
+    // light/dark mode toggle start
     if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
         document.documentElement.classList.add('dark')
       } else {
@@ -15,14 +36,33 @@ const Navbar = () => {
       
       // Whenever the user explicitly chooses to respect the OS preference
       localStorage.removeItem('theme')
+    // light/dark mode toggle end
 
 
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        setName(userName); // setting the userName into local storage
+        setUserName(''); // then resetting the input box to "" while keeping the local storage as the userName
+    };
 
     return ( 
-        <nav>
+        <nav className='text-gray-50'>
+
             <ul className='bg-gray-500 flex items-center justify-end py-5 pr-5'>
-                <Link to="/"><li className='text-gray-50 mx-1 py-1 px-3 rounded-lg hover:bg-slate-200 hover:text-gray-900 transition duration-300 ease-in-out'>Pokemon</li></Link>
-                <Link to="/pokemon"><li className='text-gray-50 mx-1 py-1 px-3 rounded-lg hover:bg-slate-200 hover:text-gray-900 transition duration-300 ease-in-out'>Search</li></Link>
+                <form onSubmit={handleSubmit}>
+                    <label>Enter a username</label>
+                    <input type="text"
+                            onChange={(e) => setUserName(e.target.value)}
+                            value={userName}
+                            className="text-gray-900"
+                            />
+                    <button type='submit'>SUBMIT</button>
+                </form>
+
+                { !name ? "" : <li>Hello {name}!</li> }
+
+                <Link to="/"><li className='mx-1 py-1 px-3 rounded-lg hover:bg-slate-200 hover:text-gray-900 transition duration-300 ease-in-out'>Pokemon</li></Link>
+                <Link to="/pokemon"><li className='mx-1 py-1 px-3 rounded-lg hover:bg-slate-200 hover:text-gray-900 transition duration-300 ease-in-out'>Search</li></Link>
                 
                 {/* sun start */}
                 <a className='mx-1 py-1 px-3'> <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
