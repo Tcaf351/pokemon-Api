@@ -21,7 +21,7 @@ const SinglePokemon = () => {
     }, [id]);
 
     return ( 
-        <div>
+        <div className='bg-gray-200 dark:bg-slate-900'>
 
             { singlePokemon &&
             <div className='grid grid-cols-3'>

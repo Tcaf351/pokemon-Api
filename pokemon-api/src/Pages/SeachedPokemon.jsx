@@ -20,7 +20,7 @@ const SearchedPokemon = () => {
     };
 
     return ( 
-        <div>
+        <div className='bg-gray-200 dark:bg-slate-900'>
             <h1>Single Pokemon</h1>
             <form onSubmit={ handleSubmit }>
                 <label>Search a Pokemon</label>

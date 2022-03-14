@@ -10,6 +10,7 @@ import SinglePokemon from './Pages/SinglePokemon';
 
 
 function App() {
+  
 
   return (
     <Router>
