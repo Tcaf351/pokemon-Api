@@ -32,15 +32,14 @@ const AllPokemon = () => {
 
 
     return ( 
-        <div className='bg-slate-200 dark:bg-gray-900 transition ease-in-out duration-1000'>
-            <h1 className='text-white'>All Pokemon</h1>
+        <div className='bg-gray-200 dark:bg-gray-900 transition ease-in-out duration-1000 min-h-screen py-3'>
 
-            <div  className="grid grid-cols-3 gap-4">
+            <div className="grid grid-cols-3 gap-4">
 
             {/* render each pokemon from api (calling the first 50) */}
             { allPokemon && allPokemon.map((pokemon) => (
 
-                <div key={pokemon.id} className='grid justify-center text-xl bg-slate-300 dark:bg-gray-600 dark:hover:bg-gray-400 transition ease-in-out duration-1000 hover:bg-slate-400  rounded-lg py-8'>
+                <div key={pokemon.id} className='grid justify-center text-xl bg-gray-300 hover:bg-gray-400 dark:bg-gray-600 dark:hover:bg-gray-400 transition ease-in-out duration-1000 rounded-lg py-8'>
 
                     <Link to={`singlepokemon/${pokemon.id}`}> 
                         <Card pokemon={pokemon} />

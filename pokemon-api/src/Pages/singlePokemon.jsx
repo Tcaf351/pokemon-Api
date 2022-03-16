@@ -23,23 +23,27 @@ const SinglePokemon = () => {
 
 
     return ( 
-        <div className='bg-gray-200 dark:bg-slate-900 min-h-screen'>
+        <div className='bg-gray-200 dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition min-h-screen ease-in-out duration-1000'>
 
             { singlePokemon &&
                 <div className='grid grid-cols-3'>
                 
                 { shinyToggle === false ? (
-                    <div className='grid justify-center order-2 cursor-pointer'>
-                        <img onClick={() => setShinyToggle(!shinyToggle)} src={singlePokemon.sprites?.front_default} alt="pokemon" className="h-40 w-40 " />
+                    <div className='grid justify-center col-span-3 cursor-pointer order-2'>
+                        <img onClick={() => setShinyToggle(!shinyToggle)} src={singlePokemon.sprites?.front_default} alt="pokemon" className="h-44 w-44" />
                     </div> ) : (
 
-                    <div className='grid justify-center order-2 cursor-pointer'>
-                        <img onClick={() => setShinyToggle(!shinyToggle)} src={singlePokemon.sprites?.front_shiny} alt="pokemon" className="h-40 w-40 " />
+                    <div className='grid justify-center col-span-3 cursor-pointer order-2'>
+                        <img onClick={() => setShinyToggle(!shinyToggle)} src={singlePokemon.sprites?.front_shiny} alt="pokemon" className="h-44 w-44" />
                     </div> 
                 )}
 
-                    <h1>{singlePokemon.name}</h1>
-                    <h1>{singlePokemon.weight}lbs</h1>
+                    <div className='col-span-3 text-center order-1 py-8'>
+                        <h1 className='text-7xl font-semibold uppercase '>{singlePokemon.name}</h1>
+                    </div>
+                    <div className='text-center col-span-3 order-3 py-2'>
+                        <h1 className='text-xl font-semibold'>{(singlePokemon.weight) * 0.1} kg</h1>
+                    </div>
                 </div> 
             }
 

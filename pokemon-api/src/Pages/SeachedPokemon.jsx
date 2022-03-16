@@ -23,20 +23,23 @@ const SearchedPokemon = () => {
     };
 
     return ( 
-        <div className='bg-gray-200 dark:bg-slate-900'>
-            <h1>Single Pokemon</h1>
+        <div className='min-h-screen bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 grid grid-cols-4 transition ease-in-out duration-1000'>
+
+            <div className="py-10 col-span-4 mx-auto ">
                 <form onSubmit={ handleSubmit(onSubmit) }>
                     <label>Search a Pokemon</label>
                     <input type="text"
                             placeholder='Pokemon'
                             {...register("pokemonName", { required: true, maxLength: 20 })} // form validation
                             onChange={handleChange}
-                            value={pokemonName} 
+                            value={pokemonName}
+                            className='mx-3 rounded-lg' 
                             />
                             {errors.pokemonName?.type === 'required' && "Pokemon name is required"}
 
-                    <button>Search</button>
+                    <button className='px-2 py-1 rounded-lg bg-indigo-500 text-gray-100'>Search</button>
                 </form>
+            </div>
 
             {searchedPokemon && <div>
                 <h1>{ searchedPokemon.name }</h1>
