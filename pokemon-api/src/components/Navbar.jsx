@@ -37,15 +37,17 @@ const Navbar = () => {
         <nav className='text-gray-50'>
 
             <ul className='bg-gray-500 flex items-center justify-end py-5 pr-5'>
-                <form onSubmit={handleSubmit}>
-                    <label>Enter a username</label>
-                    <input type="text"
-                            onChange={(e) => setUserName(e.target.value)}
-                            value={userName}
-                            className="text-gray-900"
-                            />
-                    <button type='submit'>SUBMIT</button>
-                </form>
+                <div className='justify-between'>
+                    <form onSubmit={handleSubmit}>
+                        <label>Enter a username</label>
+                        <input type="text"
+                                onChange={(e) => setUserName(e.target.value)}
+                                value={userName}
+                                className="text-gray-900 mx-3 rounded-md"
+                                />
+                        <button type='submit'>SUBMIT</button>
+                    </form>
+                </div>
 
                 { !name ? "" : <li>Hello {name}!</li> }
 

@@ -1,21 +1,50 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 
 // packages
 import axios from 'axios';
 import { useForm } from "react-hook-form";
+import Joi from 'joi';
+import { joiResolver } from '@hookform/resolvers/joi';
 
-const SearchedPokemon = () => {
+
+const SearchedPokemon = ({ shinyToggle, setShinyToggle }) => {
+    const navigate = useNavigate();
+
     const [pokemonName, setPokemonName] = useState(''); // for input
     const [searchedPokemon, setSearchedPokemon] = useState(); // for state
+    const [state, setState] = useState('');
+
+
+    // Joi Validation
+    const schema = Joi.object({
+        pokemonName: Joi.string()
+        .alphanum()
+        .min(1)
+        .max(20)
+        .required(),
+    });
+
 
     // react-hook forms
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit, formState: { errors } } = useForm({
+        resolver: joiResolver(schema), 
+    });
 
     const onSubmit = async (e) => {
-        const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`);
-        console.log(response.data);
+        try {
+            const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`);
+            console.log(response.data);
 
-        setSearchedPokemon(response.data);
+            return setSearchedPokemon(response.data);
+
+        } catch (error) {
+            // navigate('*')
+            console.log(error);
+            setState('ERROR')
+            return error.response.status
+        }
     };
 
     const handleChange = (e)=> {
@@ -33,21 +62,36 @@ const SearchedPokemon = () => {
                             {...register("pokemonName", { required: true, maxLength: 20 })} // form validation
                             onChange={handleChange}
                             value={pokemonName}
-                            className='mx-3 rounded-lg' 
+                            className='mx-3 rounded-md' 
                             />
-                            {errors.pokemonName?.type === 'required' && "Pokemon name is required"}
+                            <p>{errors.pokemonName?.message}</p>  
+                            { state === 'ERROR' ? <p>"please enter a valid pokemon name"</p> && navigate('*') : <p>{ '' }</p> }
 
                     <button className='px-2 py-1 rounded-lg bg-indigo-500 text-gray-100'>Search</button>
                 </form>
             </div>
 
-            {searchedPokemon && <div>
-                <h1>{ searchedPokemon.name }</h1>
-                <img src={ searchedPokemon.sprites?.front_default } alt="pokemon" /> 
-                <img src={  searchedPokemon.sprites?.front_shiny } alt="shiny pokemon" /> 
-                <h1>{ searchedPokemon.types[0].type.name }</h1>  
-                <h2>{searchedPokemon.weight}lbs</h2>
-             </div>
+            {searchedPokemon && 
+                <div>
+
+                    { shinyToggle === false ? (
+                        <div className='col-start-2 col-span-4 cursor-pointer'>
+                            <img onClick={() => setShinyToggle(!shinyToggle)} src={searchedPokemon.sprites?.front_default} alt="pokemon" className="h-44 w-44" />
+                        </div> ) : (
+
+                        <div className='col-start-2 col-span-4 cursor-pointer'>
+                            <img onClick={() => setShinyToggle(!shinyToggle)} src={searchedPokemon.sprites?.front_shiny} alt="pokemon" className="h-44 w-44" />
+                        </div> 
+                    )}
+
+                        <div className='text-center order-3 py-8'>
+                            <h1 className='text-7xl font-semibold uppercase '>{searchedPokemon.name}</h1>
+                        </div>
+                        <div className='text-center py-2'>
+                            <h1 className='text-xl font-semibold'>{(searchedPokemon.weight) * 0.1} kg</h1>
+                        </div>
+
+                </div>
              }
 
           

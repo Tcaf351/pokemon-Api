@@ -7,7 +7,6 @@ import axios from 'axios';
 // components
 import Card from '../components/Card';
 
-
 const AllPokemon = () => {
  
     const [allPokemon, setAllPokemon] = useState();

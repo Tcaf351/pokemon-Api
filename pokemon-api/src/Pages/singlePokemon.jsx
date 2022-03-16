@@ -4,9 +4,8 @@ import { useParams } from 'react-router-dom';
 // packages
 import axios from 'axios';
 
-const SinglePokemon = () => {
+const SinglePokemon = ({ shinyToggle, setShinyToggle }) => {
     const [singlePokemon, setSinglePokemon] = useState([]);
-    const [shinyToggle, setShinyToggle] = useState(false);
 
     let { id } = useParams();
 
@@ -28,22 +27,22 @@ const SinglePokemon = () => {
             { singlePokemon &&
                 <div className='grid grid-cols-3'>
                 
-                { shinyToggle === false ? (
-                    <div className='grid justify-center col-span-3 cursor-pointer order-2'>
-                        <img onClick={() => setShinyToggle(!shinyToggle)} src={singlePokemon.sprites?.front_default} alt="pokemon" className="h-44 w-44" />
-                    </div> ) : (
+                    { shinyToggle === false ? (
+                        <div className='grid justify-center col-span-3 cursor-pointer order-2'>
+                            <img onClick={() => setShinyToggle(!shinyToggle)} src={singlePokemon.sprites?.front_default} alt="pokemon" className="h-44 w-44" />
+                        </div> ) : (
 
-                    <div className='grid justify-center col-span-3 cursor-pointer order-2'>
-                        <img onClick={() => setShinyToggle(!shinyToggle)} src={singlePokemon.sprites?.front_shiny} alt="pokemon" className="h-44 w-44" />
-                    </div> 
-                )}
+                        <div className='grid justify-center col-span-3 cursor-pointer order-2'>
+                            <img onClick={() => setShinyToggle(!shinyToggle)} src={singlePokemon.sprites?.front_shiny} alt="pokemon" className="h-44 w-44" />
+                        </div> 
+                    )}
 
-                    <div className='col-span-3 text-center order-1 py-8'>
-                        <h1 className='text-7xl font-semibold uppercase '>{singlePokemon.name}</h1>
-                    </div>
-                    <div className='text-center col-span-3 order-3 py-2'>
-                        <h1 className='text-xl font-semibold'>{(singlePokemon.weight) * 0.1} kg</h1>
-                    </div>
+                        <div className='col-span-3 text-center order-1 py-8'>
+                            <h1 className='text-7xl font-semibold uppercase '>{singlePokemon.name}</h1>
+                        </div>
+                        <div className='text-center col-span-3 order-3 py-2'>
+                            <h1 className='text-xl font-semibold'>{(singlePokemon.weight) * 0.1} kg</h1>
+                        </div>
                 </div> 
             }
 
