@@ -6,6 +6,7 @@ import axios from 'axios';
 
 const SinglePokemon = () => {
     const [singlePokemon, setSinglePokemon] = useState([]);
+    const [shinyToggle, setShinyToggle] = useState(false);
 
     let { id } = useParams();
 
@@ -20,16 +21,26 @@ const SinglePokemon = () => {
         singlePokemonId()
     }, [id]);
 
+
     return ( 
-        <div className='bg-gray-200 dark:bg-slate-900'>
+        <div className='bg-gray-200 dark:bg-slate-900 min-h-screen'>
 
             { singlePokemon &&
-            <div className='grid grid-cols-3'>
-                <div className='grid justify-center order-2'>
-                    <img src={singlePokemon.sprites?.front_default} alt="pokemon" className="h-40 w-40 " />
-                </div>
+                <div className='grid grid-cols-3'>
+                
+                { shinyToggle === false ? (
+                    <div className='grid justify-center order-2 cursor-pointer'>
+                        <img onClick={() => setShinyToggle(!shinyToggle)} src={singlePokemon.sprites?.front_default} alt="pokemon" className="h-40 w-40 " />
+                    </div> ) : (
+
+                    <div className='grid justify-center order-2 cursor-pointer'>
+                        <img onClick={() => setShinyToggle(!shinyToggle)} src={singlePokemon.sprites?.front_shiny} alt="pokemon" className="h-40 w-40 " />
+                    </div> 
+                )}
+
                     <h1>{singlePokemon.name}</h1>
-            </div> 
+                    <h1>{singlePokemon.weight}lbs</h1>
+                </div> 
             }
 
         </div>
