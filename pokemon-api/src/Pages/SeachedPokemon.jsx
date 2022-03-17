@@ -14,7 +14,6 @@ const SearchedPokemon = ({ shinyToggle, setShinyToggle }) => {
 
     const [pokemonName, setPokemonName] = useState(''); // for input
     const [searchedPokemon, setSearchedPokemon] = useState(); // for state
-    const [state, setState] = useState('');
 
 
     // Joi Validation
@@ -40,10 +39,7 @@ const SearchedPokemon = ({ shinyToggle, setShinyToggle }) => {
             return setSearchedPokemon(response.data);
 
         } catch (error) {
-            // navigate('*')
-            console.log(error);
-            setState('ERROR')
-            return error.response.status
+            return navigate('*')
         }
     };
 
@@ -65,7 +61,6 @@ const SearchedPokemon = ({ shinyToggle, setShinyToggle }) => {
                             className='mx-3 rounded-md' 
                             />
                             <p>{errors.pokemonName?.message}</p>  
-                            { state === 'ERROR' ? <p>"please enter a valid pokemon name"</p> && navigate('*') : <p>{ '' }</p> }
 
                     <button className='px-2 py-1 rounded-lg bg-indigo-500 text-gray-100'>Search</button>
                 </form>
