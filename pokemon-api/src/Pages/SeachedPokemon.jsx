@@ -1,10 +1,10 @@
+// react packages
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import { useForm } from "react-hook-form";
 
 // packages
 import axios from 'axios';
-import { useForm } from "react-hook-form";
 import Joi from 'joi';
 import { joiResolver } from '@hookform/resolvers/joi';
 
@@ -48,39 +48,38 @@ const SearchedPokemon = ({ shinyToggle, setShinyToggle }) => {
     };
 
     return ( 
-        <div className='min-h-screen bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 grid grid-cols-4 transition ease-in-out duration-1000'>
+        <div className='min-h-screen bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 grid grid-cols-6 justify-center transition ease-in-out duration-1000'>
 
-            <div className="py-10 col-span-4 mx-auto ">
+            <div className="py-10 px-5 col-start-2 col-span-4 mx-auto">
                 <form onSubmit={ handleSubmit(onSubmit) }>
-                    <label>Search a Pokemon</label>
+                    <label className='mx-2'>Search a Pokemon</label>
                     <input type="text"
                             placeholder='Pokemon'
                             {...register("pokemonName", { required: true, maxLength: 20 })} // form validation
                             onChange={handleChange}
-                            value={pokemonName}
-                            className='mx-3 rounded-md' 
+                            value={pokemonName.toLowerCase()}
+                            className=' rounded-md' 
                             />
+                    <button className='px-2 py-1 rounded-lg bg-indigo-500 hover:bg-indigo-600 text-gray-100'>Search</button>
                             <p>{errors.pokemonName?.message}</p>  
-
-                    <button className='px-2 py-1 rounded-lg bg-indigo-500 text-gray-100'>Search</button>
                 </form>
             </div>
 
             {searchedPokemon && 
-                <div>
+                <div className='col-span-2 col-start-3'>
 
-                    { shinyToggle === false ? (
-                        <div className='col-start-2 col-span-4 cursor-pointer'>
-                            <img onClick={() => setShinyToggle(!shinyToggle)} src={searchedPokemon.sprites?.front_default} alt="pokemon" className="h-44 w-44" />
-                        </div> ) : (
+                        { shinyToggle === false ? (
+                            <div className='flex items-center justify-center cursor-pointer'>
+                                <img onClick={() => setShinyToggle(!shinyToggle)} src={searchedPokemon.sprites?.front_default} alt="pokemon" className="h-44 w-44" />
+                            </div> ) : (
 
-                        <div className='col-start-2 col-span-4 cursor-pointer'>
-                            <img onClick={() => setShinyToggle(!shinyToggle)} src={searchedPokemon.sprites?.front_shiny} alt="pokemon" className="h-44 w-44" />
-                        </div> 
-                    )}
+                            <div className='flex items-center justify-center cursor-pointer'>
+                                <img onClick={() => setShinyToggle(!shinyToggle)} src={searchedPokemon.sprites?.front_shiny} alt="pokemon" className="h-44 w-44" />
+                            </div> 
+                        )}
 
-                        <div className='text-center order-3 py-8'>
-                            <h1 className='text-7xl font-semibold uppercase '>{searchedPokemon.name}</h1>
+                        <div className='text-center py-8'>
+                            <h1 className='text-6xl font-semibold uppercase '>{searchedPokemon.name}</h1>
                         </div>
                         <div className='text-center py-2'>
                             <h1 className='text-xl font-semibold'>{(searchedPokemon.weight) * 0.1} kg</h1>
