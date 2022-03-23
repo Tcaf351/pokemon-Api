@@ -68,7 +68,7 @@ const SearchedPokemon = ({ shinyToggle, setShinyToggle }) => {
             {searchedPokemon && 
                 <div className='lg:flex lg:items-center lg:justify-around lg:h-[60vh]'>
                 
-                    <div className="lg:h-full  lg:flex lg:items-center lg:justify-center lg:flex-col">
+                    <div className="lg:h-full lg:flex lg:items-center lg:justify-center lg:flex-col">
                         { shinyToggle === false ? (
                             <div className=' cursor-pointer'>
                                 <img onClick={() => setShinyToggle(!shinyToggle)} src={searchedPokemon.sprites?.front_default} alt="pokemon" className="h-44 w-44" />

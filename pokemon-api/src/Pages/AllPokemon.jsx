@@ -13,6 +13,8 @@ const AllPokemon = () => {
     // const [loadPagination, setLoadPagination] = useState([]);
     // const [previousPagination, setPreviousPagination] = useState([]);
 
+    
+
     // bring in api
     useEffect(() => {
 
@@ -33,8 +35,15 @@ const AllPokemon = () => {
             fetchApi()
             
         } catch (error) {
-            console.log(error);
-            if (error) throw "your request could not be processed at this time, please try again." && 500;
+
+            const expectedError = error.response.status < 500;
+            console.log(expectedError);
+            if (!expectedError) {
+
+            <p>sorry, we could not fetch the pokemon at this time, please try again...</p>
+        }
+            // console.log(error);
+            // if (error.response.status === 500) throw "your request could not be processed at this time, please try again."
         }
 
 
