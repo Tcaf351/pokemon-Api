@@ -45,7 +45,7 @@ const Navbar = () => {
                                 value={userName}
                                 className="text-gray-900 rounded-md"
                                 />
-                        <button className='px-2 py-1 rounded-lg bg-indigo-500 hover:bg-indigo-600 text-gray-100' type='submit'>Submit</button>
+                        <button className='px-2 py-1 rounded-lg bg-indigo-500 hover:bg-indigo-600 text-gray-100 transition ease-out duration-200' type='submit'>Submit</button>
                     </form>
                 </div>
 
