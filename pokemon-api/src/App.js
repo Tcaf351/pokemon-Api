@@ -1,5 +1,5 @@
 // packages
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 // import { ToastContainer, toast } from 'react-toastify';
 // import 'react-toastify/dist/ReactToastify.css';
@@ -16,7 +16,6 @@ import SinglePokemon from './Pages/SinglePokemon';
 
 function App() {
   const [shinyToggle, setShinyToggle] = useState(false);
-  
 
 
   return (

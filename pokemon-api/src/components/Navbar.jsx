@@ -43,7 +43,7 @@ const Navbar = () => {
                         <input type="text"
                                 onChange={(e) => setUserName(e.target.value)}
                                 value={userName}
-                                className="text-gray-900 rounded-md"
+                                className="text-gray-900 rounded-md ml-2"
                                 />
                         <button className='px-2 py-1 rounded-lg bg-indigo-500 hover:bg-indigo-600 text-gray-100 transition ease-out duration-200' type='submit'>Submit</button>
                     </form>
@@ -52,7 +52,7 @@ const Navbar = () => {
                 { !name ? "" : <li className='mx-4'>Hello {name}!</li> }
 
                 <Link to="/"><li className='mx-1 py-1 px-3 rounded-lg hover:bg-slate-200 hover:text-gray-900 transition duration-300 ease-in-out'>Pokemon</li></Link>
-                <Link to="/pokemon"><li className='mx-1 py-1 px-3 rounded-lg hover:bg-slate-200 hover:text-gray-900 transition duration-300 ease-in-out'>Search</li></Link>
+                <Link to="/pokemon"><li className='mx-1 py-1 px-3 mr-5 rounded-lg hover:bg-slate-200 hover:text-gray-900 transition duration-300 ease-in-out'>Search</li></Link>
                 
                 {/* sun start */}
                 <span onClick={() => setTheme(colorTheme)}> 

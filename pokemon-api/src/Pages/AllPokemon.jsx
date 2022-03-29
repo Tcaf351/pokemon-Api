@@ -6,30 +6,36 @@ import axios from 'axios';
 
 // components
 import Card from '../components/Card';
+import Spinner from '../components/Spinner';
+import Pagination from '../components/Pagination';
 
 const AllPokemon = () => {
  
+    const [loading, setLoading] = useState(true);
     const [allPokemon, setAllPokemon] = useState();
-    // const [loadPagination, setLoadPagination] = useState([]);
-    // const [previousPagination, setPreviousPagination] = useState([]);
+    const [currentPageUrl, setCurrentPageUrl] = useState("https://pokeapi.co/api/v2/pokemon");
+    const [nextPageUrl, setNextPageUrl] = useState();
+    // const [prevPageUrl, setPrevPageUrl] = useState();
 
     
 
     // bring in api
     useEffect(() => {
-
         try {
             const fetchApi = async () => {
+                setLoading(true);
 
                 let allPokemonData = [];
                 
-                for (let i = 1; i <= 20; i++) {
-                const url = `https://pokeapi.co/api/v2/pokemon/${i}`;
+                for (let i = 1; i <= 50; i++) {
+                const url = `${currentPageUrl}/${i}`;
                 const response = await axios.get(url)
                 // console.log(response.data);
                 allPokemonData.push(response.data);
                 // console.log(allPokemonData)
                 }
+ 
+                setLoading(false);
                 setAllPokemon(allPokemonData);
             }
             fetchApi()
@@ -41,30 +47,26 @@ const AllPokemon = () => {
             if (!expectedError) {
 
             <p>sorry, we could not fetch the pokemon at this time, please try again...</p>
-        }
-            // console.log(error);
-            // if (error.response.status === 500) throw "your request could not be processed at this time, please try again."
-        }
+        }}
 
 
-        // try {
-        //     const loadMorePagination = async () => {
-        //         const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/`);
-        //         console.log(response.data);
-        //         const data = response.data.next;
-        //         setLoadPagination(data);
-        //     };
-        //     loadMorePagination();
+    }, [currentPageUrl]);
 
-        // } catch (error) {
-        //     console.log(error);
-        // }
-    }, []);
 
-    // const loadMorePokemon = () => {
-        
-    // };
+    if (loading) return <Spinner />
 
+    const goToNextPage = async () => {
+        let allPokemonData = [];
+                
+                    for (let i = 1; i <= 50; i++) {
+                    const url = `${currentPageUrl}/${i}`;
+                    const response = await axios.get(url)
+                    // console.log(response.data);
+                    allPokemonData.push(response.data);
+                    // console.log(allPokemonData)
+                    setAllPokemon(allPokemonData)
+                    }
+    }
 
     return ( 
         <div className='bg-gray-200 dark:bg-gray-900 transition ease-in-out duration-1000 min-h-screen py-3'>
@@ -84,10 +86,7 @@ const AllPokemon = () => {
 
             </div>
 
-            <div className='sm:w-full sm:flex sm:items-center sm:justify-center'>
-                <button className='bg-indigo-500 px-3 py-1 mx-10 rounded-lg text-gray-100 hover:bg-indigo-700 transition ease-out duration-200'>previous</button>
-                <button className='bg-indigo-500 px-3 py-1 mx-10 rounded-lg text-gray-100 hover:bg-indigo-700 transition ease-out duration-200'>next</button>
-            </div>
+            <Pagination goToNextPage={goToNextPage}  />
 
         </div>
      );

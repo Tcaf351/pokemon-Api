@@ -22,7 +22,7 @@ const SinglePokemon = ({ shinyToggle, setShinyToggle }) => {
 
 
     return ( 
-        <div className='sm:h-screen bg-gray-200 dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition min-h-screen ease-in-out duration-1000 lg:grid lg:items-center'>
+        <div className='sm:h-screen bg-gradient-to-tl from-gray-200 to-gray-600 dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition min-h-screen ease-in-out duration-1000 lg:grid lg:items-center'>
 
             { singlePokemon &&
                 <div className='grid grid-cols-3'>
