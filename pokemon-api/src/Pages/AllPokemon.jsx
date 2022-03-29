@@ -55,18 +55,6 @@ const AllPokemon = () => {
 
     if (loading) return <Spinner />
 
-    const goToNextPage = async () => {
-        let allPokemonData = [];
-                
-                    for (let i = 1; i <= 50; i++) {
-                    const url = `${currentPageUrl}/${i}`;
-                    const response = await axios.get(url)
-                    // console.log(response.data);
-                    allPokemonData.push(response.data);
-                    // console.log(allPokemonData)
-                    setAllPokemon(allPokemonData)
-                    }
-    }
 
     return ( 
         <div className='bg-gray-200 dark:bg-gray-900 transition ease-in-out duration-1000 min-h-screen py-3'>
@@ -79,14 +67,18 @@ const AllPokemon = () => {
                 <div key={pokemon.id} className='grid justify-center text-xl bg-gray-300 hover:bg-gray-400 dark:bg-gray-600 dark:hover:bg-gray-400 transition ease-in-out duration-1000 hover:transition hover:ease-in-out hover:duration-500 rounded-lg py-8'>
 
                     <Link to={`singlepokemon/${pokemon.id}`}> 
-                        <Card pokemon={pokemon} />
+                        <Card
+                        id={pokemon.id}
+                        name={pokemon.name}
+                        image={pokemon.sprites.front_default}
+                        type={pokemon.types[0].type.name} />
                     </Link>
                 </div>
             )) }
 
             </div>
 
-            <Pagination goToNextPage={goToNextPage}  />
+            {/* <Pagination goToNextPage={goToNextPage}  /> */}
 
         </div>
      );
