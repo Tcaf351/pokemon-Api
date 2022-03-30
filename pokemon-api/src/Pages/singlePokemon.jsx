@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 
 // packages
 import axios from 'axios';
+import { motion } from 'framer-motion';
 
 const SinglePokemon = ({ shinyToggle, setShinyToggle }) => {
     const [singlePokemon, setSinglePokemon] = useState([]); // storing searched pokemon into state
@@ -10,17 +11,15 @@ const SinglePokemon = ({ shinyToggle, setShinyToggle }) => {
 
     let { id } = useParams();
 
-    const singlePokemonId = async () => {
-        const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`) 
-        console.log(response.data);
-        setSinglePokemon(response.data) // setting the pokemon that was searched into state
-        setPokemonType(response.data.types[0].type.name) // storing the pokemon type in state
-
-    };
-
-
     useEffect(() => {
-        singlePokemonId() // calling function on line 7
+        const singlePokemonId = async () => {
+            const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`) 
+            console.log(response.data);
+            setSinglePokemon(response.data) // setting the pokemon that was searched into state
+            setPokemonType(response.data.types[0].type.name) // storing the pokemon type in state
+        };
+
+        singlePokemonId() // calling function on line 14
     }, [id]); // re-runs useEffect whenever the user enters a new pokemon's name in the input box, line 14
 
 
@@ -108,7 +107,19 @@ const SinglePokemon = ({ shinyToggle, setShinyToggle }) => {
         <div className={backGround}>
 
             { singlePokemon &&
-                <div className='xs:flex xs:items-center xs:justify-center lg:justify-around xs:flex-col lg:h-[60vh] rounded-xl xs:w-9/12 shadow-2xl bg-opacity-40 backdrop-blur-md border border-slate-300 border-r-0 border-b-0 border-opacity-50'>
+                <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.3 }}
+                className='xs:flex xs:items-center xs:justify-center lg:justify-around xs:flex-col lg:h-[60vh] rounded-xl xs:w-9/12 shadow-2xl bg-opacity-40 backdrop-blur-md border border-slate-300 border-r-0 border-b-0 border-opacity-50'>
+
+                <motion.div
+                    animate={{ y: 70 }} 
+                    initial={{ y: -550 }}
+                    transition={{ delay: 1.5 }}
+                >
+                    <p className='uppercase font-semibold text-lg'>Click on the Pokemon to change its form</p>
+                </motion.div>
                 
                 <div className="lg:h-1/2 xs:flex xs:items-center xs:justify-center xs:flex-col">
                     { shinyToggle === false ? (
@@ -143,7 +154,7 @@ const SinglePokemon = ({ shinyToggle, setShinyToggle }) => {
                     </div>
                         
 
-                </div> 
+                </motion.div> 
             }
 
         </div>

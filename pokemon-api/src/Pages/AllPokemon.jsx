@@ -11,7 +11,7 @@ import Pagination from '../components/Pagination';
 
 const AllPokemon = () => {
  
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const [allPokemon, setAllPokemon] = useState();
     const [initialNumber, setInitialNumber] = useState(1);
     const [amountOfPokemon, setAmountOfPokemon] = useState(151);
@@ -53,6 +53,7 @@ const AllPokemon = () => {
     const genOne = () => { // makeshift Pagination system changing the values on line 28 to render all the pokemon in that generation
         setInitialNumber(1);
         setAmountOfPokemon(151);
+        
     };
 
     const genTwo = () => {
@@ -75,7 +76,9 @@ const AllPokemon = () => {
 
             { loading === true ? <Spinner /> : false }
 
-            <div className="grid grid-cols-3 gap-4">
+            <div 
+            
+            className="grid grid-cols-3 gap-4">
 
             {/* render each pokemon from api (calling the first 50) */}
             { allPokemon && allPokemon.map((pokemon) => (
