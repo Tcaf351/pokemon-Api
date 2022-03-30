@@ -1,8 +1,6 @@
 // packages
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-// import { ToastContainer, toast } from 'react-toastify';
-// import 'react-toastify/dist/ReactToastify.css';
 
 // components
 import Navbar from './components/Navbar';
@@ -15,7 +13,7 @@ import SinglePokemon from './Pages/SinglePokemon';
 
 
 function App() {
-  const [shinyToggle, setShinyToggle] = useState(false);
+  const [shinyToggle, setShinyToggle] = useState(false); // this allows user to toggle to the pokemon's shiny form and then back to normal
 
 
   return (

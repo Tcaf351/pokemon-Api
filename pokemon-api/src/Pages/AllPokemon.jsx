@@ -13,30 +13,28 @@ const AllPokemon = () => {
  
     const [loading, setLoading] = useState(true);
     const [allPokemon, setAllPokemon] = useState();
-    const [currentPageUrl, setCurrentPageUrl] = useState("https://pokeapi.co/api/v2/pokemon");
-    const [nextPageUrl, setNextPageUrl] = useState();
-    // const [prevPageUrl, setPrevPageUrl] = useState();
-
+    const [initialNumber, setInitialNumber] = useState(1);
+    const [amountOfPokemon, setAmountOfPokemon] = useState(151);
     
 
     // bring in api
     useEffect(() => {
         try {
             const fetchApi = async () => {
-                setLoading(true);
+                setLoading(true); // displays loading bar while the pokemon api gets pushed into empty allPokemonData array
 
                 let allPokemonData = [];
                 
-                for (let i = 1; i <= 50; i++) {
-                const url = `${currentPageUrl}/${i}`;
+                for (let i = initialNumber; i <= amountOfPokemon; i++) { // will make 100 fetch requests for 100 pokemon
+                const url = `https://pokeapi.co/api/v2/pokemon/${i}`;
                 const response = await axios.get(url)
                 // console.log(response.data);
-                allPokemonData.push(response.data);
+                allPokemonData.push(response.data); // accessing each pokemon's details and pushing to array
                 // console.log(allPokemonData)
                 }
  
-                setLoading(false);
-                setAllPokemon(allPokemonData);
+                setLoading(false); // stops loading bar from displaying as all pokemon will be in array and dispayed on screen.
+                setAllPokemon(allPokemonData); // sets state to the array of 100 pokemon to then be mapped over to display
             }
             fetchApi()
             
@@ -50,14 +48,32 @@ const AllPokemon = () => {
         }}
 
 
-    }, [currentPageUrl]);
+    }, [initialNumber, amountOfPokemon]);
 
+    const genOne = () => { // makeshift Pagination system changing the values on line 28 to render all the pokemon in that generation
+        setInitialNumber(1);
+        setAmountOfPokemon(151);
+    };
 
-    if (loading) return <Spinner />
+    const genTwo = () => {
+        setInitialNumber(152);
+        setAmountOfPokemon(251);
+    };
 
+    const genThree = () => {
+        setInitialNumber(252);
+        setAmountOfPokemon(386);
+    };
+
+    const genFour = () => {
+        setInitialNumber(387);
+        setAmountOfPokemon(493);
+    };
 
     return ( 
         <div className='bg-gray-200 dark:bg-gray-900 transition ease-in-out duration-1000 min-h-screen py-3'>
+
+            { loading === true ? <Spinner /> : false }
 
             <div className="grid grid-cols-3 gap-4">
 
@@ -78,7 +94,12 @@ const AllPokemon = () => {
 
             </div>
 
-            {/* <Pagination goToNextPage={goToNextPage}  /> */}
+            <Pagination 
+                genOne={genOne} 
+                genTwo={genTwo}  
+                genThree={genThree}
+                genFour={genFour}
+                />
 
         </div>
      );

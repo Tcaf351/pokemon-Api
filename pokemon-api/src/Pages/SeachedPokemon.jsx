@@ -12,9 +12,9 @@ import { joiResolver } from '@hookform/resolvers/joi';
 const SearchedPokemon = ({ shinyToggle, setShinyToggle }) => {
     const navigate = useNavigate();
 
-    const [pokemonName, setPokemonName] = useState(''); // for input
+    const [pokemonName, setPokemonName] = useState(''); // for input field
     const [searchedPokemon, setSearchedPokemon] = useState(); // for state
-    const [pokemonType, setPokemonType] = useState();
+    const [pokemonType, setPokemonType] = useState(); // accessing the pokemon's type
 
 
     // Joi Validation
@@ -49,7 +49,7 @@ const SearchedPokemon = ({ shinyToggle, setShinyToggle }) => {
         setPokemonName(e.target.value);
     };
 
-    let gradientColour;
+    let gradientColour; // accesses the pokemom's type to then use the switch statement to dynamically change gradient colour depending on the pokemon type
     switch (pokemonType) {
 
         case "fire":
@@ -124,15 +124,15 @@ const SearchedPokemon = ({ shinyToggle, setShinyToggle }) => {
         gradientColour = "to-gray-200"
     }
 
-    let gradient = `bg-gradient-to-tl from-gray-200 ${gradientColour}`
+    let gradient = `bg-gradient-to-tl from-gray-200 ${gradientColour}` // dynamic gradient colour as stated on line 52
 
 
-    let backGround = `sm:h-screen dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition min-h-screen ease-in-out duration-1000 lg:flex lg:flex-col lg:items-center lg:justify-center lg:border ${gradient}`;
+    let backGround = `sm:h-screen dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition min-h-screen ease-in-out duration-1000 xs:flex xs:flex-col xs:items-center xs:justify-center lg:border ${gradient}`;
 
     return ( 
         <div className={backGround}>
 
-            <div className="py-10 px-5 lg:flex lg:items-center lg:justify-center">
+            <div className="py-10 px-5 xs:flex xs:items-center xs:justify-center">
                 <form onSubmit={ handleSubmit(onSubmit) }>
                     <label className='mx-2'>Search a Pokemon</label>
                     <input type="text"
@@ -148,21 +148,21 @@ const SearchedPokemon = ({ shinyToggle, setShinyToggle }) => {
             </div>
 
             {searchedPokemon && 
-                <div className='lg:flex lg:items-center lg:justify-around lg:h-[60vh] rounded-xl w-9/12 shadow-2xl bg-opacity-40 backdrop-blur-md border border-slate-300 border-r-0 border-b-0 border-opacity-50'>
+                <div className='xs:flex xs:items-center xs:justify-center lg:justify-around xs:flex-col lg:h-[60vh] rounded-xl xs:w-9/12 shadow-2xl bg-opacity-40 backdrop-blur-md border border-slate-300 border-r-0 border-b-0 border-opacity-50'>
                 
-                    <div className="lg:h-full lg:flex lg:items-center lg:justify-center lg:flex-col">
+                    <div className="lg:h-full xs:flex xs:items-center xs:justify-center xs:flex-col">
                         { shinyToggle === false ? (
                             <div className='cursor-pointer'>
-                                <img onClick={() => setShinyToggle(!shinyToggle)} src={searchedPokemon.sprites?.front_default} alt="pokemon" className="h-44 w-44" />
+                                <img onClick={() => setShinyToggle(!shinyToggle)} src={searchedPokemon.sprites?.front_default} alt={searchedPokemon.name} className="h-44 w-44" />
                             </div> ) : (
 
-                            <div className=' cursor-pointer'>
-                                <img onClick={() => setShinyToggle(!shinyToggle)} src={searchedPokemon.sprites?.front_shiny} alt="pokemon" className="h-44 w-44" />
+                            <div className='cursor-pointer'>
+                                <img onClick={() => setShinyToggle(!shinyToggle)} src={searchedPokemon.sprites?.front_shiny} alt={searchedPokemon.name} className="h-44 w-44" />
                             </div> 
                         )}
 
                         <div>
-                            <h1 className='text-6xl font-semibold uppercase'>{searchedPokemon.name}</h1>
+                            <h1 className='xs:text-4xl lg:text-6xl font-semibold uppercase'>{searchedPokemon.name}</h1>
                         </div>
                     </div>
 

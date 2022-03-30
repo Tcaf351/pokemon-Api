@@ -5,28 +5,27 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
 const SinglePokemon = ({ shinyToggle, setShinyToggle }) => {
-    const [singlePokemon, setSinglePokemon] = useState([]);
-    const [pokemonType, setPokemonType] = useState();
+    const [singlePokemon, setSinglePokemon] = useState([]); // storing searched pokemon into state
+    const [pokemonType, setPokemonType] = useState(); // store the pokemon's type to later use with the dynamic gradient
 
     let { id } = useParams();
 
     const singlePokemonId = async () => {
         const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`) 
         console.log(response.data);
-        setSinglePokemon(response.data)
-        setPokemonType(response.data.types[0].type.name)
+        setSinglePokemon(response.data) // setting the pokemon that was searched into state
+        setPokemonType(response.data.types[0].type.name) // storing the pokemon type in state
 
     };
-    // let background = {type: singlePokemon.types[0].type.name};
+
 
     useEffect(() => {
-        singlePokemonId()
-    }, [id]);
+        singlePokemonId() // calling function on line 7
+    }, [id]); // re-runs useEffect whenever the user enters a new pokemon's name in the input box, line 14
 
-    // let type = singlePokemon.types[0].type.name;
 
-    let gradientColour;
-    switch (pokemonType) {
+    let gradientColour; // accesses the pokemom's type to then use the switch statement to dynamically change gradient colour depending on the pokemon type
+    switch (pokemonType) { // accessing state on line 9
 
         case "fire":
             gradientColour = "to-red-500";
@@ -100,7 +99,7 @@ const SinglePokemon = ({ shinyToggle, setShinyToggle }) => {
         gradientColour = "to-gray-200"
     }
 
-    let gradient = `bg-gradient-to-tl from-gray-200 ${gradientColour}`
+    let gradient = `bg-gradient-to-tl from-gray-200 ${gradientColour}` // dynamic gradient colour for background
 
 
     let backGround = `sm:h-screen dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition min-h-screen ease-in-out duration-1000 lg:grid lg:items-center ${gradient}`;
