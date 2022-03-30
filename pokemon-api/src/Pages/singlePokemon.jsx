@@ -102,39 +102,46 @@ const SinglePokemon = ({ shinyToggle, setShinyToggle }) => {
     let gradient = `bg-gradient-to-tl from-gray-200 ${gradientColour}` // dynamic gradient colour for background
 
 
-    let backGround = `sm:h-screen dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition min-h-screen ease-in-out duration-1000 lg:grid lg:items-center ${gradient}`;
-
+    let backGround = `sm:h-screen dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition min-h-screen ease-in-out duration-1000 xs:flex xs:flex-col xs:items-center xs:justify-center lg:border ${gradient}`;
 
     return ( 
         <div className={backGround}>
 
             { singlePokemon &&
-                <div className='flex items-center justify-center bg-opacity-40 backdrop-blur-md border border-slate-300 border-r-0 border-b-0 border-opacity-50'>
+                <div className='xs:flex xs:items-center xs:justify-center lg:justify-around xs:flex-col lg:h-[60vh] rounded-xl xs:w-9/12 shadow-2xl bg-opacity-40 backdrop-blur-md border border-slate-300 border-r-0 border-b-0 border-opacity-50'>
                 
+                <div className="lg:h-1/2 xs:flex xs:items-center xs:justify-center xs:flex-col">
                     { shinyToggle === false ? (
-                        <div className='lg:flex lg:justify-center lg:col-span-2 cursor-pointer'>
+                        <div className='cursor-pointer'>
                             <img onClick={() => setShinyToggle(!shinyToggle)} src={singlePokemon.sprites?.front_default} alt="pokemon" className="h-44 w-44" />
                         </div> ) : (
 
-                        <div className='lg:grid lg:justify-center lg:col-span-2 cursor-pointer'>
+                        <div className='cursor-pointer'>
                             <img onClick={() => setShinyToggle(!shinyToggle)} src={singlePokemon.sprites?.front_shiny} alt="pokemon" className="h-44 w-44" />
                         </div> 
                     )}
 
-                        <div className='lg:grid lg:justify-center lg:col-span-2'>
-                            <h1 className='text-6xl font-semibold uppercase'>{singlePokemon.name}</h1>
+                        <div>
+                            <h1 className='xs:text-4xl lg:text-6xl font-semibold uppercase'>{singlePokemon.name}</h1>
                         </div>
+                </div>
 
-                        <div className='lg:grid lg:grid-cols-2'>
-                            <div>
-                                <h1 className='text-xl font-semibold uppercase'>weight</h1>
-                                <h1 className='text-md font-semibold'>{(singlePokemon.weight) * 0.1}kg</h1>
-                            </div>
-                            <div>
-                                <h1 className='text-xl font-semibold uppercase'>height</h1>
-                                <h1 className='text-md font-semibold'>{((singlePokemon.height * 3.2808) / 10).toFixed(1)}ft</h1>
-                            </div>
+
+                        <div className='lg:w-1/4 lg:h-1/4 lg:flex lg:items-center lg:justify-around'>
+                        <div className="xs:my-10 lg:my-0 lg:mx-10">
+                            <h1 className='text-xl font-bold uppercase'>weight</h1>
+                            <h1 className='text-md font-semibold'>{(singlePokemon.weight) * 0.1}kg</h1>
                         </div>
+                        <div className="xs:my-10 lg:my-0 lg:mx-10">
+                            <h1 className='text-xl font-bold uppercase'>height</h1>
+                            <h1 className='text-md font-semibold'>{((singlePokemon.height * 3.2808) / 10).toFixed(1)}ft</h1>
+                        </div>
+                        <div className="xs:my-10 lg:my-0 lg:mx-10">
+                            <h1 className='text-xl font-bold uppercase'>Type</h1>
+                            <h1 className='text-md font-semibold uppercase'>{pokemonType}</h1>
+                        </div>
+                    </div>
+                        
 
                 </div> 
             }
