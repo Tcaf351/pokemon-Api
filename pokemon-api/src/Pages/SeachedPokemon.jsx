@@ -132,8 +132,8 @@ const SearchedPokemon = ({ shinyToggle, setShinyToggle }) => {
     return ( 
         <div className={backGround}>
 
-            <div className="py-10 px-5 xs:flex xs:items-center xs:justify-center">
-                <form onSubmit={ handleSubmit(onSubmit) }>
+            <div className="py-10 px-5">
+                <form className='xs:flex xs:items-center xs:justify-center xs:flex-col lg:flex-row' onSubmit={ handleSubmit(onSubmit) }>
                     <label className='mx-2'>Search a Pokemon</label>
                     <input type="text"
                             placeholder='Pokemon'
@@ -150,7 +150,7 @@ const SearchedPokemon = ({ shinyToggle, setShinyToggle }) => {
             {searchedPokemon && 
                 <div className='xs:flex xs:items-center xs:justify-center lg:justify-around xs:flex-col lg:h-[60vh] rounded-xl xs:w-9/12 shadow-2xl bg-opacity-40 backdrop-blur-md border border-slate-300 border-r-0 border-b-0 border-opacity-50'>
                 
-                    <div className="lg:h-full xs:flex xs:items-center xs:justify-center xs:flex-col">
+                    <div className="lg:h-1/2 xs:flex xs:items-center xs:justify-center xs:flex-col">
                         { shinyToggle === false ? (
                             <div className='cursor-pointer'>
                                 <img onClick={() => setShinyToggle(!shinyToggle)} src={searchedPokemon.sprites?.front_default} alt={searchedPokemon.name} className="h-44 w-44" />
@@ -169,16 +169,16 @@ const SearchedPokemon = ({ shinyToggle, setShinyToggle }) => {
                         
         
                     <div className='lg:w-1/4 lg:h-1/4 lg:flex lg:items-center lg:justify-around'>
-                        <div className="my-24">
-                            <h1 className='text-xl font-semibold uppercase'>weight</h1>
+                        <div className="xs:my-10 lg:my-0 lg:mx-10">
+                            <h1 className='text-xl font-bold uppercase'>weight</h1>
                             <h1 className='text-md font-semibold'>{(searchedPokemon.weight) * 0.1}kg</h1>
                         </div>
-                        <div className="my-24">
-                            <h1 className='text-xl font-semibold uppercase'>height</h1>
+                        <div className="xs:my-10 lg:my-0 lg:mx-10">
+                            <h1 className='text-xl font-bold uppercase'>height</h1>
                             <h1 className='text-md font-semibold'>{((searchedPokemon.height * 3.2808) / 10).toFixed(1)}ft</h1>
                         </div>
-                        <div>
-                        <h1 className='text-xl font-semibold uppercase'>Type</h1>
+                        <div className="xs:my-10 lg:my-0 lg:mx-10">
+                            <h1 className='text-xl font-bold uppercase'>Type</h1>
                             <h1 className='text-md font-semibold uppercase'>{pokemonType}</h1>
                         </div>
                     </div>
