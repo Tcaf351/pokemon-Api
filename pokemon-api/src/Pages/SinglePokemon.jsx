@@ -17,7 +17,7 @@ const SinglePokemon = ({ shinyToggle, setShinyToggle }) => {
             console.log(response.data);
             setSinglePokemon(response.data) // setting the pokemon that was searched into state
             setPokemonType(response.data.types[0].type.name) // storing the pokemon type in state
-            setShinyToggle(false)
+            setShinyToggle(false);
         };
 
         singlePokemonId() // calling function on line 14
@@ -142,7 +142,7 @@ const SinglePokemon = ({ shinyToggle, setShinyToggle }) => {
                         <div className='lg:w-1/4 lg:h-1/4 lg:flex lg:items-center lg:justify-around'>
                         <div className="xs:my-10 lg:my-0 lg:mx-10">
                             <h1 className='text-xl font-bold uppercase'>weight</h1>
-                            <h1 className='text-md font-semibold'>{(singlePokemon.weight) * 0.1}kg</h1>
+                            <h1 className='text-md font-semibold'>{(singlePokemon.weight * 10) / 100}kg</h1>
                         </div>
                         <div className="xs:my-10 lg:my-0 lg:mx-10">
                             <h1 className='text-xl font-bold uppercase'>height</h1>

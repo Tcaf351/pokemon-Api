@@ -40,7 +40,7 @@ const SearchedPokemon = ({ shinyToggle, setShinyToggle }) => {
 
             setSearchedPokemon(response.data);
             setPokemonType(response.data.types[0].type.name)
-            setShinyToggle(false)
+            setShinyToggle(false);
 
         } catch (error) {
             return navigate('*')
