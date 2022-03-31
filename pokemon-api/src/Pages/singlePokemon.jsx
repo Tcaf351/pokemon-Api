@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 
 // packages
 import axios from 'axios';
@@ -156,6 +156,7 @@ const SinglePokemon = ({ shinyToggle, setShinyToggle }) => {
 
                 </motion.div> 
             }
+            <Link to="/"><button className='bg-indigo-500 px-3 py-1 mx-10 my-3 rounded-lg text-gray-100 hover:bg-indigo-700 transition ease-out duration-200'>Go Back</button></Link>
 
         </div>
      );
