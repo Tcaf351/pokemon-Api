@@ -17,6 +17,7 @@ const SinglePokemon = ({ shinyToggle, setShinyToggle }) => {
             console.log(response.data);
             setSinglePokemon(response.data) // setting the pokemon that was searched into state
             setPokemonType(response.data.types[0].type.name) // storing the pokemon type in state
+            setShinyToggle(false)
         };
 
         singlePokemonId() // calling function on line 14
