@@ -18,7 +18,7 @@ function App() {
 
   return (
     <Router>
-      <div>
+      <div className='font-roboto'>
       <Navbar />
         <Routes>
           <Route path="/" element={ <AllPokemon /> } />
