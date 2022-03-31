@@ -114,11 +114,11 @@ const SinglePokemon = ({ shinyToggle, setShinyToggle }) => {
                 className='xs:flex xs:items-center xs:justify-center lg:justify-around xs:flex-col lg:h-[60vh] rounded-xl xs:w-9/12 shadow-2xl bg-opacity-40 backdrop-blur-md border border-slate-300 border-r-0 border-b-0 border-opacity-50'>
 
                 <motion.div
-                    animate={{ y: 70 }} 
+                    animate={{ y: 10 }} 
                     initial={{ y: -550 }}
                     transition={{ delay: 1.5 }}
                 >
-                    <p className='uppercase font-semibold text-lg'>Click on the Pokemon to change its form</p>
+                    <p className='uppercase font-semibold text-lg xs:px-3'>Click on the Pokemon to change its form</p>
                 </motion.div>
                 
                 <div className="lg:h-1/2 xs:flex xs:items-center xs:justify-center xs:flex-col">

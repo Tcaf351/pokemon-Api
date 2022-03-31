@@ -2,7 +2,7 @@
 
 const Pagination = ({ genOne, genTwo, genThree, genFour }) => {
     return ( 
-        <div className='sm:w-full sm:flex sm:items-center sm:justify-center sm:my-10'>
+        <div className='sm:w-full xs:flex xs:items-center xs:justify-center sm:my-3'>
             <button
                 onClick={genOne}
                 className='bg-indigo-500 px-3 py-1 mx-10 rounded-lg text-gray-100 hover:bg-indigo-700 transition ease-out duration-200'>Gen 1

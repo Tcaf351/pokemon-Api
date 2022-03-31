@@ -36,9 +36,12 @@ const Navbar = () => {
     return ( 
         <nav className='text-gray-50'>
 
-            <ul className='bg-gray-400 dark:bg-gray-700 flex items-center justify-end py-5 pr-5 transition ease-in-out duration-1000'>
-                <div className='justify-between'>
-                    <form onSubmit={handleSubmit}>
+            <ul className='bg-gray-400 dark:bg-gray-700 w-full flex items-center xs:flex-col md:flex-row xs:justify-center lg:justify-between py-5 pr-5 transition ease-in-out duration-1000'>
+
+                <div className='xs:justify-between'>
+                    <form 
+                    className='xs:flex xs:items-center xs:justify-center xs:flex-col lg:flex-row px-5'
+                    onSubmit={handleSubmit}>
                         <label>Enter a username</label>
                         <input type="text"
                                 onChange={(e) => setUserName(e.target.value)}
@@ -51,8 +54,10 @@ const Navbar = () => {
 
                 { !name ? "" : <li className='mx-4'>Hello {name}!</li> }
 
-                <Link to="/"><li className='mx-1 py-1 px-3 rounded-lg hover:bg-slate-200 hover:text-gray-900 transition duration-300 ease-in-out'>Pokemon</li></Link>
-                <Link to="/pokemon"><li className='mx-1 py-1 px-3 mr-5 rounded-lg hover:bg-slate-200 hover:text-gray-900 transition duration-300 ease-in-out'>Search</li></Link>
+
+            <div className='flex items-center justify-center xs:flex-col md:flex-row'>
+                <Link to="/"><li className='mx-1 xs:py-2 lg:py-1 px-3 rounded-lg hover:bg-slate-200 hover:text-gray-900 transition duration-300 ease-in-out'>Pokemon</li></Link>
+                <Link to="/pokemon"><li className='mx-1 xs:py-2 lg:py-1 px-3 mr-5 rounded-lg hover:bg-slate-200 hover:text-gray-900 transition duration-300 ease-in-out'>Search</li></Link>
                 
                 {/* sun start */}
                 <span onClick={() => setTheme(colorTheme)}> 
@@ -67,6 +72,9 @@ const Navbar = () => {
                 </svg> ) }
                 </span>
                 {/* moon end */}
+
+                </div>
+                
             </ul>
         </nav>
      );
