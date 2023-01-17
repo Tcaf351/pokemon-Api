@@ -1,6 +1,6 @@
 
 
-const Card = ({ id, name, image, type }) => {
+const Card = ({ id, name, image }) => {
 
     
 

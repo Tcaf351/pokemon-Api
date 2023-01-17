@@ -21,7 +21,7 @@ const SinglePokemon = ({ shinyToggle, setShinyToggle }) => {
         };
 
         singlePokemonId() // calling function on line 14
-    }, [id]); // re-runs useEffect whenever the user enters a new pokemon's name in the input box, line 14
+    }, [id, setShinyToggle]); // re-runs useEffect whenever the user enters a new pokemon's name in the input box, line 14
 
 
     let gradientColour; // accesses the pokemom's type to then use the switch statement to dynamically change gradient colour depending on the pokemon type
